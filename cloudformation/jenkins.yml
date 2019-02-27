@@ -1,3 +1,7 @@
+Parameters:
+  KeyPair:
+    Type: "AWS::EC2::KeyPair::KeyName"
+
 Resources:
   JenkinsSG:
     Type: "AWS::EC2::SecurityGroup"
@@ -24,3 +28,4 @@ Resources:
       ImageId: "ami-0ac019f4fcb7cb7e6"
       SecurityGroups:
         - !Ref "JenkinsSG"
+      KeyName: !Ref "KeyPair"

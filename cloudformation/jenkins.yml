@@ -35,5 +35,6 @@ Resources:
             - "\n"
             - - "#!/bin/bash"
               - "apt update && apt upgrade -y"
-              - "apt install git -y"
+              - "apt install git python-pip -y"
+              - "pip install awscli --upgrade --user"
               - "sudo -H -u ubuntu -c 'git clone git@github.com:danielc2013/jenkins-quick-deploy'"

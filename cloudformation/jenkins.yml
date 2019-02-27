@@ -29,3 +29,10 @@ Resources:
       SecurityGroups:
         - !Ref "JenkinsSG"
       KeyName: !Ref "KeyPair"
+      UserData:
+        Fn::Base64:
+          Fn::Join:
+            - "\n"
+            - - "apt update && apt upgrade -y"
+              - "apt install git -y"
+              - "git clone git@github.com:danielc2013/jenkins-quick-deploy"

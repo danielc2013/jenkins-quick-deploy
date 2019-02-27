@@ -1,0 +1,22 @@
+Resources:
+  JenkinsSG:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties: 
+      GroupName: "JenkinsSG"
+      GroupDescription: "Allows all ingress on 80 and 443"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          CidrIp: "0.0.0.0/0"
+          FromPort: 80
+          ToPort: 80
+        - IpProtocol: tcp
+          CidrIp: "0.0.0.0/0"
+          FromPort: 443
+          ToPort: 443
+  JenkinsInstance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      InstanceType: "t2.micro"
+      ImageId: "ami-0ac019f4fcb7cb7e6"
+      SecurityGroups:
+        - !Ref "JenkinsSG"

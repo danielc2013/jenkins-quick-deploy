@@ -33,6 +33,7 @@ Resources:
         Fn::Base64:
           Fn::Join:
             - "\n"
-            - - "apt update && apt upgrade -y"
+            - - "#!/bin/bash"
+              - "apt update && apt upgrade -y"
               - "apt install git -y"
-              - "git clone git@github.com:danielc2013/jenkins-quick-deploy"
+              - "sudo -H -u ubuntu -c 'git clone git@github.com:danielc2013/jenkins-quick-deploy'"

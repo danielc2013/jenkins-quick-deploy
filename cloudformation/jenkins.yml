@@ -66,7 +66,7 @@ Resources:
                 - " "
                 - - "aws s3 cp"
                   - !Ref DeployKeyLocation
-                  - "/home/ubuntu/.ssh/deploy_key"
-              - "chown ubuntu:ubuntu /home/ubuntu/.ssh/deploy_key"
-              - "chmod 400 /home/ubuntu/.ssh/deploy_key"
-              - "sudo -H -u ubuntu -c 'git clone git@github.com:danielc2013/jenkins-quick-deploy'"
+                  - "~/.ssh/deploy_key"
+              - "chmod 400 ~/.ssh/deploy_key"
+              - "ssh-add ~/.ssh/deploy_key"
+              - "git clone git@github.com:danielc2013/jenkins-quick-deploy"

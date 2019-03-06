@@ -1,7 +1,8 @@
 Parameters:
   KeyPair:
     Type: "AWS::EC2::KeyPair::KeyName"
-
+  DeployKeyLocation:  
+    Type: String
 Resources:
   JenkinsRole:
     Type: "AWS::IAM::Role"
@@ -61,4 +62,11 @@ Resources:
               - "apt update && apt upgrade -y"
               - "apt install git python-pip -y"
               - "pip install awscli --upgrade --user"
+              - Fn::Join:
+                - " "
+                - - "aws s3 cp"
+                  - !Ref DeployKeyLocation
+                  - "/home/ubuntu/.ssh/deploy_key"
+              - "chown ubuntu:ubuntu /home/ubuntu/.ssh/deploy_key"
+              - "chmod 400 /home/ubuntu/.ssh/deploy_key"
               - "sudo -H -u ubuntu -c 'git clone git@github.com:danielc2013/jenkins-quick-deploy'"

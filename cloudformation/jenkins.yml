@@ -17,9 +17,9 @@ Resources:
             Action:
               - "sts:AssumeRole"
       Path: "/"
-      Policies:
+      ManagedPolicyArns:
         -
-          PolicyName: "AmazonS3ReadOnlyAccess"
+          "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
       RoleName: "JenkinsInstanceRole"
   JenkinsInstanceProfile:
     Type: "AWS::IAM::InstanceProfile"

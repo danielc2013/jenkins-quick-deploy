@@ -3,6 +3,29 @@ Parameters:
     Type: "AWS::EC2::KeyPair::KeyName"
 
 Resources:
+  JenkinsRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "ec2.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        -
+          PolicyName: "AmazonS3ReadOnlyAccess"
+      RoleName: "JenkinsInstanceRole"
+  JenkinsInstanceProfile:
+    Type: "AWS::IAM::InstanceProfile"
+    Properties:
+      Roles:
+        - !Ref "JenkinsRole"
   JenkinsSG:
     Type: "AWS::EC2::SecurityGroup"
     Properties: 
@@ -29,6 +52,7 @@ Resources:
       SecurityGroups:
         - !Ref "JenkinsSG"
       KeyName: !Ref "KeyPair"
+      IamInstanceProfile: !Ref JenkinsInstanceProfile
       UserData:
         Fn::Base64:
           Fn::Join:

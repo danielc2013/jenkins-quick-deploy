@@ -2,6 +2,9 @@ Parameters:
   InstanceType:
     Type: String
     Default: "t2.micro"
+  JenkinsImageId:
+    Type: String
+    Default: "ami-0ac019f4fcb7cb7e6"
   KeyPair:
     Type: "AWS::EC2::KeyPair::KeyName"
   DeployKeyLocation:  
@@ -52,7 +55,7 @@ Resources:
     Type: "AWS::EC2::Instance"
     Properties:
       InstanceType: !Ref InstanceType
-      ImageId: "ami-0ac019f4fcb7cb7e6"
+      ImageId: !Ref JenkinsImageId
       SecurityGroups:
         - !Ref "JenkinsSG"
       KeyName: !Ref "KeyPair"

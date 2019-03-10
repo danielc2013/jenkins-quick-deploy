@@ -83,5 +83,5 @@ Resources:
               - "ssh-add ~/.ssh/deploy_key"
               - Fn::Join:
               - - " "
-                - "git clone"
-                - !Ref GitRepo
+                - - "git clone"
+                  - !Ref GitRepo

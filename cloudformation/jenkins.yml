@@ -11,6 +11,9 @@ Parameters:
     Type: "AWS::EC2::KeyPair::KeyName"
   DeployKeyLocation:  
     Type: String
+  GitRepo:
+    Type: String
+    Default: "git@github.com:danielc2013/jenkins-quick-deploy"
 Resources:
   JenkinsRole:
     Type: "AWS::IAM::Role"
@@ -67,14 +70,18 @@ Resources:
           Fn::Join:
             - "\n"
             - - "#!/bin/bash"
-              - "apt update"
+              - "apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y"
               - "apt install git awscli -y"
+              - "umask 077"
               - Fn::Join:
                 - " "
                 - - "aws s3 cp"
                   - !Ref DeployKeyLocation
                   - "~/.ssh/deploy_key"
-              - "chmod 400 ~/.ssh/deploy_key"
+              - "umask 000"
               - "eval \"$(ssh-agent -s)\""
               - "ssh-add ~/.ssh/deploy_key"
-              - "git clone git@github.com:danielc2013/jenkins-quick-deploy"
+              - Fn::Join:
+              - - " "
+                - "git clone"
+                - !Ref GitRepo

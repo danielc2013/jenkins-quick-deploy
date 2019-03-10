@@ -67,7 +67,7 @@ Resources:
           Fn::Join:
             - "\n"
             - - "#!/bin/bash"
-              - "apt update && apt upgrade -y"
+              - "apt update"
               - "apt install git awscli -y"
               - Fn::Join:
                 - " "

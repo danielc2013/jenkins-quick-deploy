@@ -82,6 +82,6 @@ Resources:
               - "eval \"$(ssh-agent -s)\""
               - "ssh-add ~/.ssh/deploy_key"
               - Fn::Join:
-              - - " "
+                - " "
                 - - "git clone"
                   - !Ref GitRepo

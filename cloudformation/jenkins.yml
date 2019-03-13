@@ -62,9 +62,9 @@ Resources:
       "AWS::CloudFormation::Init":
         config:
           files:
-            "/tmp/solo.rb":
+            "/home/ubuntu/solo.rb":
               content: "cookbook_path ['/tmp/quick_start']"
-            "/tmp/node.json":
+            "/home/ubuntu/node.json":
               content: "{\"run_list\": [\"recipe[bootstrap::default]\"]}"
     Properties:
       InstanceType: !Ref InstanceType
@@ -98,4 +98,4 @@ Resources:
                   - !Ref GitRepo
                   - "/home/ubuntu/quick-deploy"
               - "berks vendor /tmp/quick_start -b /home/ubuntu/quick-deploy/bootstrap/Berksfile"
-              - "chef-solo -c /tmp/solo.rb -j /tmp/node.json"
+              - "chef-solo -c /home/ubuntu/solo.rb -j /home/ubuntu/node.json"

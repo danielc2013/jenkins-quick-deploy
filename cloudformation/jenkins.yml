@@ -85,3 +85,4 @@ Resources:
                 - " "
                 - - "git clone"
                   - !Ref GitRepo
+                  - "/home/ubuntu/quick-deploy"

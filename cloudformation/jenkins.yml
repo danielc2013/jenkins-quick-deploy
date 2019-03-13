@@ -81,6 +81,7 @@ Resources:
               - "umask $U_MASK"
               - "eval \"$(ssh-agent -s)\""
               - "ssh-add ~/.ssh/deploy_key"
+              - "ssh-keyscan github.com >> ~/.ssh/known_hosts"
               - Fn::Join:
                 - " "
                 - - "git clone"

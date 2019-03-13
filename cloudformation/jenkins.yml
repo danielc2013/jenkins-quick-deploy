@@ -58,6 +58,12 @@ Resources:
           ToPort: 22
   JenkinsInstance:
     Type: "AWS::EC2::Instance"
+    Metadata:
+      "AWS::CloudFormation::Init":
+        config:
+          files:
+            "/tmp/solo.rb":
+              content: "cookbook_path ['/tmp/quick_start']"
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: !Ref JenkinsImageId
@@ -72,6 +78,8 @@ Resources:
             - - "#!/bin/bash"
               - "apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y"
               - "apt install git awscli -y"
+              - "wget https://packages.chef.io/files/stable/chefdk/3.2.30/ubuntu/18.04/chefdk_3.2.30-1_amd64.deb"
+              - "dpkg -i chefdk_3.2.30-1_amd64.deb"
               - "U_MASK=$(umask); umask 077"
               - Fn::Join:
                 - " "
@@ -87,3 +95,4 @@ Resources:
                 - - "git clone"
                   - !Ref GitRepo
                   - "/home/ubuntu/quick-deploy"
+              - "berks vendor /tmp/quick_start -b /home/ubuntu/quick-deploy/bootstrap/Berksfile"

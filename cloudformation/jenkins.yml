@@ -64,6 +64,8 @@ Resources:
           files:
             "/tmp/solo.rb":
               content: "cookbook_path ['/tmp/quick_start']"
+            "/tmp/node.json":
+              content: "{\"run_list\": [\"recipe[bootstrap::default]\"]}"
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: !Ref JenkinsImageId
@@ -96,3 +98,4 @@ Resources:
                   - !Ref GitRepo
                   - "/home/ubuntu/quick-deploy"
               - "berks vendor /tmp/quick_start -b /home/ubuntu/quick-deploy/bootstrap/Berksfile"
+              - "chef-solo -c /tmp/solo.rb -j /tmp/node.json"

@@ -4,11 +4,7 @@ Quick launches a Jenkins server in AWS
 
 ## TODO
 
-- Remove hard coded values
-
-  - InstanceType
-  - image id
-  - Repo
+    - Add parameter to choose ubuntu version
 
 ## Setup
 

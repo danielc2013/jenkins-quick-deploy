@@ -78,14 +78,15 @@ Resources:
           Fn::Join:
             - "\n"
             - - "#!/bin/bash"
+              - "apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y"
+              - "apt install python-pip git awscli -y"
+              - "pip install https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz"
               - Fn::Join:
                 - " "
                 - - "/opt/aws/bin/cfn-init -v --stack"
                   - !Ref "AWS::StackName"
                   - "--resource JenkinsInstance --region"
                   - !Ref "AWS::Region"
-              - "apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y"
-              - "apt install git awscli -y"
               - "wget https://packages.chef.io/files/stable/chefdk/3.2.30/ubuntu/18.04/chefdk_3.2.30-1_amd64.deb"
               - "dpkg -i chefdk_3.2.30-1_amd64.deb"
               - "U_MASK=$(umask); umask 077"

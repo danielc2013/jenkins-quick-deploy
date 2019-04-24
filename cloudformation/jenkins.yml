@@ -78,6 +78,12 @@ Resources:
           Fn::Join:
             - "\n"
             - - "#!/bin/bash"
+              - Fn::Join:
+                - " "
+                - - "/opt/aws/bin/cfn-init -v --stack"
+                  - !Ref AWS:StackName
+                  - "--resource JenkinsInstance --region"
+                  - !Ref AWS:Region
               - "apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y"
               - "apt install git awscli -y"
               - "wget https://packages.chef.io/files/stable/chefdk/3.2.30/ubuntu/18.04/chefdk_3.2.30-1_amd64.deb"

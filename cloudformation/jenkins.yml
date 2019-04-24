@@ -83,7 +83,7 @@ Resources:
               - "pip install https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz"
               - Fn::Join:
                 - " "
-                - - "/opt/aws/bin/cfn-init -v --stack"
+                - - "cfn-init -v --stack"
                   - !Ref "AWS::StackName"
                   - "--resource JenkinsInstance --region"
                   - !Ref "AWS::Region"

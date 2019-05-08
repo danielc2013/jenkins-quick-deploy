@@ -109,7 +109,7 @@ Resources:
               - "chef-solo -c /home/ubuntu/solo.rb -j /home/ubuntu/node.json"
               - Fn::Join:
                 - " "
-                - - "cfn-signal -e $? " --stack
+                - - "cfn-signal -e $? --stack "
                   - !Ref "AWS::StackName"
                   - "--resource JenkinsInstance --region"
                   - !Ref "AWS::Region"

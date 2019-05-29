@@ -66,9 +66,9 @@ Resources:
               content: "cookbook_path ['/tmp/quick_start']"
             "/home/ubuntu/node.json":
               content: "{\"run_list\": [\"recipe[bootstrap::default]\"]}"
-    CreationPolicy:
-      ResourceSignal:
-        Timeout: "PT10M"
+    # CreationPolicy:
+    #   ResourceSignal:
+    #     Timeout: "PT10M"
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: !Ref JenkinsImageId
@@ -110,9 +110,9 @@ Resources:
               - "export HOME=/home/ubuntu"
               - "berks vendor /tmp/quick_start -b /home/ubuntu/quick-deploy/bootstrap/Berksfile"
               - "chef-solo -c /home/ubuntu/solo.rb -j /home/ubuntu/node.json"
-              - Fn::Join:
-                - " "
-                - - "cfn-signal -e $? --stack "
-                  - !Ref "AWS::StackName"
-                  - "--resource JenkinsInstance --region"
-                  - !Ref "AWS::Region"
+              # - Fn::Join:
+              #   - " "
+              #   - - "cfn-signal -e $? --stack "
+              #     - !Ref "AWS::StackName"
+              #     - "--resource JenkinsInstance --region"
+              #     - !Ref "AWS::Region"

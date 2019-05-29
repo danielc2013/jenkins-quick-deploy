@@ -48,7 +48,7 @@ Resources:
           CidrIp: "0.0.0.0/0"
           FromPort: 80
           ToPort: 80
-        - IpProtocol: tcp
+        - IpProtocol: tcp 
           CidrIp: "0.0.0.0/0"
           FromPort: 443
           ToPort: 443
@@ -56,6 +56,10 @@ Resources:
           CidrIp: "0.0.0.0/0"
           FromPort: 22
           ToPort: 22
+        - IpProtocol: tcp
+          CidrIp: "0.0.0.0/0"
+          FromPort: 8080
+          ToPort: 8080
   JenkinsInstance:
     Type: "AWS::EC2::Instance"
     Metadata:
@@ -104,15 +108,15 @@ Resources:
               - "ssh-keyscan github.com >> ~/.ssh/known_hosts"
               - Fn::Join:
                 - " "
-                - - "git clone"
-                  - !Ref GitRepo
-                  - "/home/ubuntu/quick-deploy"
-              - "export HOME=/home/ubuntu"
-              - Fn::Join:
-                - " "
                 - - "cfn-signal -e $? --stack "
                   - !Ref "AWS::StackName"
                   - "--resource JenkinsInstance --region"
                   - !Ref "AWS::Region"
               - "berks vendor /tmp/quick_start -b /home/ubuntu/quick-deploy/bootstrap/Berksfile"
               - "chef-solo -c /home/ubuntu/solo.rb -j /home/ubuntu/node.json > /var/log/chef-output.log"
+              - Fn::Join:
+                - " "
+                - - "git clone"
+                  - !Ref GitRepo
+                  - "/home/ubuntu/quick-deploy"
+              - "export HOME=/home/ubuntu"

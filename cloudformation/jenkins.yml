@@ -108,15 +108,15 @@ Resources:
               - "ssh-keyscan github.com >> ~/.ssh/known_hosts"
               - Fn::Join:
                 - " "
-                - - "cfn-signal -e $? --stack "
-                  - !Ref "AWS::StackName"
-                  - "--resource JenkinsInstance --region"
-                  - !Ref "AWS::Region"
-              - "berks vendor /tmp/quick_start -b /home/ubuntu/quick-deploy/bootstrap/Berksfile"
-              - "chef-solo -c /home/ubuntu/solo.rb -j /home/ubuntu/node.json > /var/log/chef-output.log"
-              - Fn::Join:
-                - " "
                 - - "git clone"
                   - !Ref GitRepo
                   - "/home/ubuntu/quick-deploy"
               - "export HOME=/home/ubuntu"
+              - "berks vendor /tmp/quick_start -b /home/ubuntu/quick-deploy/bootstrap/Berksfile"
+              - "chef-solo -c /home/ubuntu/solo.rb -j /home/ubuntu/node.json > /var/log/chef-output.log"
+              - Fn::Join:
+                - " "
+                - - "cfn-signal -e $? --stack "
+                  - !Ref "AWS::StackName"
+                  - "--resource JenkinsInstance --region"
+                  - !Ref "AWS::Region"

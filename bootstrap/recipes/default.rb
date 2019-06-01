@@ -6,6 +6,6 @@
 include_recipe 'jenkins::java'
 include_recipe 'jenkins::master'
 
-jenkins_command 'jenkins_start' do
+jenkins_command 'safe_restart' do
   action :execute
 end

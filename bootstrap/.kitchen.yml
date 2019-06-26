@@ -1,7 +1,9 @@
 ---
 driver:
   name: vagrant
-
+  network:
+    - ["forwarded_port", {guest: 80, host: 8080}]
+    - ["forwarded_port", {guest: 8080, host: 8081}]
 provisioner:
   name: chef_zero
   # You may wish to disable always updating cookbooks in CI or other testing environments.

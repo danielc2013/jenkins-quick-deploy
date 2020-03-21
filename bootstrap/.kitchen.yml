@@ -26,3 +26,7 @@ suites:
       inspec_tests:
         - test/integration/default
     attributes:
+      jenkins:
+        server:
+          plugins: ['workflow-aggregator']
+          version: '1.511'
